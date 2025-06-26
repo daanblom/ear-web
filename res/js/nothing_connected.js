@@ -28,6 +28,10 @@ async function switchViewFromModelID(model, sku) {
         window.location.href = "MainControl_flaaffy";
     } else if (model.base == "B162") {
         window.location.href = "MainControl_cleffa";
+    } else if (model.base == "B184") {
+        window.location.href = "MainControl_gligar";
+    } else if (model.base == "B179") {
+        window.location.href = "MainControl_girafarig";
     } else {
         document.getElementById("scan_button-c").innerText = "Incompatible Device";
     }
@@ -197,6 +201,7 @@ function processSerial(serial) {
     }
     let headSerial = serial.substring(0, 2);
     let SKU = ""
+    let isAltList = false;
     if (serial === "12345678901234567") {
         let modelEarOne = getModelFromSKU("01");
         switchViewFromModelID(modelEarOne, "01");
@@ -220,6 +225,10 @@ function processSerial(serial) {
     else if (headSerial === "13") {
         //document.getElementById("device_container").innerHTML = '<div class="device-info"><p>Device Found</p><p>Serial Number: ' + serial + '</p></div>';
         SKU = serial.substring(4, 6);
+        Year = serial.substring(6, 8);
+        if (Year === "25") {
+            isAltList = true;
+        }
     }
     else if (headSerial === "CI") {
         SKU = "65";
@@ -228,7 +237,7 @@ function processSerial(serial) {
         //document.getElementById("device_container").innerHTML = '<div class="device-info"><p>Incompatible Device</p><p>Serial Number: ' + serial + '</p></div>';
         return;
     }
-    let model = getModelFromSKU(SKU);
+    let model = getModelFromSKU(SKU, isAltList);
     console.log(model);
 
     if (model) {
@@ -249,6 +258,16 @@ function processSerial(serial) {
         }
     }
     switchViewFromModelID(model, SKU);
+}
+
+function forceModelForDemo(sku, isAltList = false) {
+    let model = getModelFromSKU(sku, isAltList);
+    if (model) {
+        console.log("Forcing model for demo: " + model.name);
+        switchViewFromModelID(model, sku);
+    } else {
+        console.error("Model not found for SKU: " + sku);
+    }
 }
 
 

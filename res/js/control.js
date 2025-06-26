@@ -22,7 +22,7 @@ function updateBattery(leftText, caseText, rightText) {
     batteryRight.innerText = rightText;
 }
 
-function getModelFromSKU(SKU) {
+function getModelFromSKU(SKU, altList = false) {
     var sku_to_model = {
         "01": "ear_1_white",
         "02": "ear_1_black",
@@ -83,7 +83,6 @@ function getModelFromSKU(SKU) {
         "82": "espeon_white",
         "83": "espeon_black",
         "11200005": "flaaffy_white",
-
     }
 
     var models = {
@@ -303,7 +302,69 @@ function getModelFromSKU(SKU) {
             duoImg: "",
             isANC: false
         },
+        "gligar_white": {
+            name: "CMF Buds 2 Plus",
+            base: "B184",
+            leftImg: "../assets/b184_white_left.webp",
+            caseImg: "../assets/b184_white_case.webp",
+            rightImg: "../assets/b184_white_right.webp",
+            duoImg: "",
+            isANC: true
+        },
+        "gligar_blue": {
+            name: "CMF Buds 2 Plus",
+            base: "B184",
+            leftImg: "../assets/b184_blue_left.webp",
+            caseImg: "../assets/b184_blue_case.webp",
+            rightImg: "../assets/b184_blue_right.webp",
+            duoImg: "",
+            isANC: true
+        },
+        "girafarig_black": {
+            name: "CMF Buds 2",
+            base: "B179",
+            leftImg: "../assets/b179_black_left.webp",
+            caseImg: "../assets/b179_black_case.webp",
+            rightImg: "../assets/b179_black_right.webp",
+            duoImg: "",
+            isANC: true
+        },
+        "girafarig_green": {
+            name: "CMF Buds 2",
+            base: "B179",
+            leftImg: "../assets/b179_green_left.webp",
+            caseImg: "../assets/b179_green_case.webp",
+            rightImg: "../assets/b179_green_right.webp",
+            duoImg: "",
+            isANC: true
+        },
+        "girafarig_orange": {
+            name: "CMF Buds 2",
+            base: "B179",
+            leftImg: "../assets/b179_orange_left.webp",
+            caseImg: "../assets/b179_orange_case.webp",
+            rightImg: "../assets/b179_orange_right.webp",
+            duoImg: "",
+            isANC: true
+        },
     };
+    if (altList) {
+        sku_to_model = {
+            "76": "espeon_black",
+            "77": "espeon_white",
+            "78": "espeon_orange",
+            "79": "espeon_blue",
+            "80": "espeon_blue",
+            "81": "espeon_orange",
+            "82": "espeon_white",
+            "83": "espeon_black",
+            "98": "girafarig_black",
+            "99": "girafarig_green",
+            "00": "girafarig_orange",
+            "03": "gligar_blue",
+            "05": "gligar_white",
+        };
+    }
     model = sku_to_model[SKU];
     return models[model];
 }
@@ -316,7 +377,13 @@ function getImageForModel(modelID) {
 async function updateBudsInfo(imageOnly=false) {
     //get sku from local storage
     var modelID = localStorage.getItem("sku");
-    var modelInfo = getModelFromSKU(modelID);
+    var modelInfo = localStorage.getItem("model");
+    if (modelInfo) {
+        modelInfo = JSON.parse(modelInfo);
+    }
+    else {
+        return;
+    }
     var leftBudImg = document.querySelector("#left_ear_peace");
     var caseImg = document.querySelector("#case-img");
     var rightBudImg = document.querySelector("#right_ear_peace");

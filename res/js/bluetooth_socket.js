@@ -13,7 +13,7 @@ let operationID = 0;
 let operationList = {};
 
 
-let debug = true;
+let debug = false;
 if (!debug) {
     console.log = function () { };
 }
@@ -82,6 +82,8 @@ async function initDevice() {
     await new Promise(resolve => setTimeout(resolve, 100));
     getFirmware();
     await new Promise(resolve => setTimeout(resolve, 100));
+    sendUTCtime();
+    await new Promise(resolve => setTimeout(resolve, 100));
     sendInEarRead();
     await new Promise(resolve => setTimeout(resolve, 100));
     sendLatencyModeRead();
@@ -136,7 +138,7 @@ async function connectSPP(sppPort=null) {
             }
             let rawData = new Uint8Array(value.buffer);
             //check if first byte is 0x55, else continue
-            if (rawData[0] !== 85 || rawData.length < 10) {
+            if (rawData[0] !== 85 || rawData.length < 8) {
                 continue;
             }
             //header is 8 bytes long
@@ -322,13 +324,13 @@ function read_advanced_eq_status(hexString)
 }
 
 function getEQ() {
-    if (modelBase !== "B172" && modelBase !== "B168") {
+    if (modelBase !== "B172" && modelBase !== "B168" && modelBase !== "B179" && modelBase !== "B184" && modelBase !== "B185") {
         send(49183, [], "readEQ");
     }
 }
 
 function getListeningMode() {
-    if (modelBase === "B172" || modelBase === "B168") {
+    if (modelBase === "B172" || modelBase === "B168" || modelBase === "B179" || modelBase === "B184" || modelBase === "B185") {
         send(49232, [], "readListeningMode");
     }
 }
@@ -348,7 +350,7 @@ function setEQ(level) {
 }
 
 function setListeningMode(level) {
-    if (modelBase !== "B172" && modelBase !== "B168") {
+    if (modelBase !== "B172" && modelBase !== "B168" && modelBase !== "B179" && modelBase !== "B184" && modelBase !== "B185") {
         return;
     }
     let byteArray = [0x00, 0x00];
@@ -357,7 +359,7 @@ function setListeningMode(level) {
 }
 
 function set_enhanced_bass(enabled, level) {
-    if (modelBase === "B171" || modelBase === "B172" || modelBase === "B168" || modelBase === "B162") {
+    if (modelBase === "B171" || modelBase === "B172" || modelBase === "B168" || modelBase === "B162" || modelBase === "B184" || modelBase === "B179") {
         level *= 2;
         let byteArray = [0x00, 0x00];
         if (enabled) {
@@ -369,13 +371,13 @@ function set_enhanced_bass(enabled, level) {
 }
 
 function get_enhanced_bass() {
-    if (modelBase === "B171" || modelBase === "B172" || modelBase === "B168" || modelBase === "B162") {
+    if (modelBase === "B171" || modelBase === "B172" || modelBase === "B168" || modelBase === "B162" || modelBase === "B184" || modelBase === "B179") {
         send(49230, [], "readEnhancedBass");
     }
 }
 
 function read_enhanced_bass(hexString) {
-    if (modelBase === "B171" || modelBase === "B172" || modelBase === "B168" || modelBase === "B162") {
+    if (modelBase === "B171" || modelBase === "B172" || modelBase === "B168" || modelBase === "B162" || modelBase === "B184" || modelBase === "B179") {
         let hexArray = hexString.match(/.{1,2}/g).map(byte => parseInt(byte, 16));
         let enabled = hexArray[8];
         let level = hexArray[9];
@@ -438,7 +440,13 @@ function createEQPacket(eqBands) {
         throw new Error("Too many EQ bands (max 255)");
     }
 
-    const maxGain = Math.max(...eqBands.map(band => band.gain));
+    let maxGain = 0.0;
+    for (const band of eqBands) {
+        if (band.gain > maxGain) {
+            maxGain = band.gain;
+        }
+    }
+
     const totalGain = -maxGain;
     
     const packetSize = 1 + 4 + (eqBands.length * 16);
@@ -724,7 +732,7 @@ async function getConfigForFirmware() {
 
 
 function launchEarFitTest() {
-    if (modelBase === "B155" || modelBase === "B171" || modelBase === "B172" || modelBase === "B162") {
+    if (modelBase === "B155" || modelBase === "B171" || modelBase === "B172" || modelBase === "B162" || modelBase === "B184" || modelBase === "B179") {
         send(61460, [0x01]);
     }
 }
@@ -802,6 +810,19 @@ function setPersonalizedANC(enabled) {
         }
         send(61457, byteArray, "");
     }
+}
+
+function sendUTCtime() {
+    var date = new Date();
+    var secEpoch = Math.floor(date.getTime() / 1000);
+    //long to 4 bytes
+    var byteArray = new Uint8Array(4);
+    byteArray[0] = (secEpoch >> 24) & 0xFF;
+    byteArray[1] = (secEpoch >> 16) & 0xFF;
+    byteArray[2] = (secEpoch >> 8) & 0xFF;
+    byteArray[3] = secEpoch & 0xFF;
+    console.log("Sending UTC time: " + byteArray.map(byte => byte.toString(16).padStart(2, '0')).join(''));
+    send(61450, byteArray, "setUTCtime");
 }
 
 function sendGetGesture() {
