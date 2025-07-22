@@ -83,6 +83,10 @@ function getModelFromSKU(SKU, altList = false) {
         "82": "espeon_white",
         "83": "espeon_black",
         "11200005": "flaaffy_white",
+        "11300001": "elekid_black",
+        "11300002": "elekid_black",
+        "11300003": "elekid_black",
+        "11300006": "elekid_white",
     }
 
     var models = {
@@ -347,6 +351,24 @@ function getModelFromSKU(SKU, altList = false) {
             duoImg: "",
             isANC: true
         },
+        "elekid_black": {
+            name: "Nothing Headphone (1)",
+            base: "B170",
+            leftImg: "../assets/b170_black_left.webp",
+            caseImg: "",
+            rightImg: "",
+            duoImg: "",
+            isANC: true
+        },
+        "elekid_white": {
+            name: "Nothing Headphone (1)",
+            base: "B170",
+            leftImg: "../assets/b170_grey_left.webp",
+            caseImg: "",
+            rightImg: "",
+            duoImg: "",
+            isANC: true
+        }
     };
     if (altList) {
         sku_to_model = {
@@ -378,7 +400,7 @@ function getImageForModel(modelID) {
     return modelInfo.rightImg;
 }
 
-async function updateBudsInfo(imageOnly=false) {
+async function updateBudsInfo(imageOnly=false, isHeadphone=false) {
     //get sku from local storage
     var modelID = localStorage.getItem("sku");
     var modelInfo = localStorage.getItem("model");
@@ -389,14 +411,19 @@ async function updateBudsInfo(imageOnly=false) {
         return;
     }
     var leftBudImg = document.querySelector("#left_ear_peace");
-    var caseImg = document.querySelector("#case-img");
-    var rightBudImg = document.querySelector("#right_ear_peace");
+    if (!isHeadphone) {
+        var caseImg = document.querySelector("#case-img");
+        var rightBudImg = document.querySelector("#right_ear_peace");
+    }
     
     leftBudImg.src = modelInfo.leftImg;
-    if (caseImg != null) {
-        caseImg.src = modelInfo.caseImg;
+    if (!isHeadphone)
+    {
+        if (caseImg != null) {
+            caseImg.src = modelInfo.caseImg;
+        }
+        rightBudImg.src = modelInfo.rightImg;
     }
-    rightBudImg.src = modelInfo.rightImg;
 
     if (!imageOnly) {
         var portsOpened = await navigator.serial.getPorts();

@@ -209,8 +209,8 @@ function sendBattery() {
 }
 function readBattery(hexString) {
     let connectedDevices = 0;
-    let batteryStatus = { "left": "DISCONNECTED", "right": "DISCONNECTED", "case": "DISCONNECTED" };
-    let deviceIdToKey = { 0x02: "left", 0x03: "right", 0x04: "case" };
+    let batteryStatus = { "left": "DISCONNECTED", "right": "DISCONNECTED", "case": "DISCONNECTED", "stereo": "DISCONNECTED" };
+    let deviceIdToKey = { 0x02: "left", 0x03: "right", 0x04: "case", 0x06: "stereo" };
     let BATTERY_MASK = 127;
     let RECHARGING_MASK = 128;
 
@@ -231,10 +231,16 @@ function readBattery(hexString) {
     let batteryLeft = batteryStatus["left"]["batteryLevel"];
     let batteryRight = batteryStatus["right"]["batteryLevel"];
     let batteryCase = batteryStatus["case"]["batteryLevel"];
+    let batteryStereo = batteryStatus["stereo"]["batteryLevel"];
     console.log(batteryLeft);
-    setBattery("l", batteryLeft)
-    setBattery("r", batteryRight)
-    setBattery("c", batteryCase)
+    if (batteryStereo !== "DISCONNECTED") {
+        setBattery("s", batteryStereo)
+    }
+    else {
+        setBattery("l", batteryLeft)
+        setBattery("r", batteryRight)
+        setBattery("c", batteryCase)
+    }
 }
 function getCommand(header) {
     console.log("header " + header)
@@ -316,7 +322,7 @@ function read_advanced_eq_status(hexString)
     let hexArray = hexString.match(/.{2}/g).map(byte => parseInt(byte, 16));
     let advancedStatus = hexArray[8];
     console.log("advancedEQ " + advancedStatus);
-    if (modelBase === "B157" || modelBase === "B155" || modelBase === "B171" || modelBase === "B174") {
+    if (modelBase === "B157" || modelBase === "B155" || modelBase === "B171" || modelBase === "B174" || modelBase === "B170") { 
         if (advancedStatus === 1) {
             setEQfromRead(6);
         }
@@ -359,7 +365,7 @@ function setListeningMode(level) {
 }
 
 function set_enhanced_bass(enabled, level) {
-    if (modelBase === "B171" || modelBase === "B172" || modelBase === "B168" || modelBase === "B162" || modelBase === "B184" || modelBase === "B179") {
+    if (modelBase === "B171" || modelBase === "B172" || modelBase === "B168" || modelBase === "B162" || modelBase === "B184" || modelBase === "B179" || modelBase === "B170") {
         level *= 2;
         let byteArray = [0x00, 0x00];
         if (enabled) {
@@ -371,13 +377,13 @@ function set_enhanced_bass(enabled, level) {
 }
 
 function get_enhanced_bass() {
-    if (modelBase === "B171" || modelBase === "B172" || modelBase === "B168" || modelBase === "B162" || modelBase === "B184" || modelBase === "B179") {
+    if (modelBase === "B171" || modelBase === "B172" || modelBase === "B168" || modelBase === "B162" || modelBase === "B184" || modelBase === "B179" || modelBase === "B170") {
         send(49230, [], "readEnhancedBass");
     }
 }
 
 function read_enhanced_bass(hexString) {
-    if (modelBase === "B171" || modelBase === "B172" || modelBase === "B168" || modelBase === "B162" || modelBase === "B184" || modelBase === "B179") {
+    if (modelBase === "B171" || modelBase === "B172" || modelBase === "B168" || modelBase === "B162" || modelBase === "B184" || modelBase === "B179" || modelBase === "B170") {
         let hexArray = hexString.match(/.{1,2}/g).map(byte => parseInt(byte, 16));
         let enabled = hexArray[8];
         let level = hexArray[9];
@@ -604,7 +610,13 @@ function ringBuds(isRing, isLeft = false) {
         } else {
             byteArray[0] = 0x00;
         }
-        send(61442, byteArray);
+    } else if (modelBase === "B170") {
+        byteArray = [0x06, 0x00];
+        if (isRing) {
+            byteArray[1] = 0x01;
+        } else {
+            byteArray[1] = 0x00;
+        }
     } else if (modelBase !== "B181") {
         byteArray = [0x00, 0x00];
         if (isLeft) {
@@ -615,8 +627,8 @@ function ringBuds(isRing, isLeft = false) {
         if (isRing) {
             byteArray[1] = 0x01;
         }
-        send(61442, byteArray);
     }
+    send(61442, byteArray);
 }
 
 function getFirmware() {
@@ -849,9 +861,10 @@ function readGesture(hexString) {
     updateGesturesFromArray(gestureArray);
 }
 
-function sendGestures(device, typeog, action) {
+function sendGestures(device, typeog, action, typebutton=0x01) {
     var byteArray = [0x01, 0x02, 0x01, 0x03, 0x0b];
     byteArray[1] = parseInt(device);
+    byteArray[2] = parseInt(typebutton);
     byteArray[3] = parseInt(typeog);
     byteArray[4] = parseInt(action);
     send(61443, byteArray);

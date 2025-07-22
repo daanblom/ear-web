@@ -32,6 +32,8 @@ async function switchViewFromModelID(model, sku) {
         window.location.href = "MainControl_gligar";
     } else if (model.base == "B179") {
         window.location.href = "MainControl_girafarig";
+    } else if (model.base == "B170") {
+        window.location.href = "MainControl_elekid";
     } else {
         document.getElementById("scan_button-c").innerText = "Incompatible Device";
     }
@@ -217,6 +219,10 @@ function processSerial(serial) {
             //Ear (open) TODO: Find a better way to identify both
             SKU = "11200005";
         }
+    }
+    else if (headSerial === "M3") {
+        SKU = serial.substring(4, 6);
+        SKU = "113000"+ SKU; 
     }
     else if (headSerial === "SH") {
         //document.getElementById("device_container").innerHTML = '<div class="device-info"><p>Device Found</p><p>Serial Number: ' + serial + '</p></div>';
