@@ -825,6 +825,9 @@ function setPersonalizedANC(enabled) {
 }
 
 function sendUTCtime() {
+    if (modelBase === "B181") {
+        return;
+    }
     var date = new Date();
     var secEpoch = Math.floor(date.getTime() / 1000);
     var byteArray = new Uint8Array(4);
