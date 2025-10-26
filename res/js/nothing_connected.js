@@ -228,6 +228,7 @@ function processSerial(serial) {
     else if (headSerial === "SH") {
         //document.getElementById("device_container").innerHTML = '<div class="device-info"><p>Device Found</p><p>Serial Number: ' + serial + '</p></div>';
         SKU = serial.substring(4, 6);
+        let year = serial.substring(6, 8);
         if (year === "25") {
             isAltList = true;
         }
