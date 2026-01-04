@@ -364,7 +364,7 @@ function setListeningMode(level) {
 }
 
 function set_enhanced_bass(enabled, level) {
-    if (modelBase === "B171" || modelBase === "B172" || modelBase === "B168" || modelBase === "B162" || modelBase === "B184" || modelBase === "B179" || modelBase === "B170") {
+    if (modelBase === "B171" || modelBase === "B172" || modelBase === "B168" || modelBase === "B162" || modelBase === "B184" || modelBase === "B179" || modelBase === "B170" || modelBase === "B164") {
         level *= 2;
         let byteArray = [0x00, 0x00];
         if (enabled) {
@@ -376,13 +376,13 @@ function set_enhanced_bass(enabled, level) {
 }
 
 function get_enhanced_bass() {
-    if (modelBase === "B171" || modelBase === "B172" || modelBase === "B168" || modelBase === "B162" || modelBase === "B184" || modelBase === "B179" || modelBase === "B170" || modelBase === "B185") {
+    if (modelBase === "B171" || modelBase === "B172" || modelBase === "B168" || modelBase === "B162" || modelBase === "B184" || modelBase === "B179" || modelBase === "B170" || modelBase === "B185" || modelBase === "B164") {
         send(49230, [], "readEnhancedBass");
     }
 }
 
 function read_enhanced_bass(hexString) {
-    if (modelBase === "B171" || modelBase === "B172" || modelBase === "B168" || modelBase === "B162" || modelBase === "B184" || modelBase === "B179" || modelBase === "B170" || modelBase === "B185") {
+    if (modelBase === "B171" || modelBase === "B172" || modelBase === "B168" || modelBase === "B162" || modelBase === "B184" || modelBase === "B179" || modelBase === "B170" || modelBase === "B185" || modelBase === "B164") {
         let hexArray = hexString.match(/.{1,2}/g).map(byte => parseInt(byte, 16));
         let enabled = hexArray[8];
         let level = hexArray[9];
@@ -609,7 +609,7 @@ function ringBuds(isRing, isLeft = false) {
         } else {
             byteArray[0] = 0x00;
         }
-    } else if (modelBase === "B170") {
+    } else if (modelBase === "B170" || modelBase === "B164") {
         byteArray = [0x06, 0x00];
         if (isRing) {
             byteArray[1] = 0x01;
@@ -641,6 +641,7 @@ function getLEDCaseColor() {
 }
 
 function readFirmware(hexstring) {
+    firmwareVersion = "";
     let hexArray = new Uint8Array(hexstring.match(/.{1,2}/g).map(byte => parseInt(byte, 16)));
     let size = hexArray[5];
     for (let i = 0; i < size; i++) {
@@ -766,6 +767,9 @@ function sendLatencyModeRead() {
 }
 
 function readInEar(hexString) {
+    if (modelBase === "B164") {
+        return;
+    }
     console.log("readInEar called");
     hexString = new Uint8Array(hexString.match(/.{1,2}/g).map(byte => parseInt(byte, 16)));
     inEarStatus = hexString[10];

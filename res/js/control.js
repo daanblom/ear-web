@@ -145,7 +145,7 @@ function getModelFromFastpair(fastpairID) {
         "4DFC4A": {
             name: "CMF Neckband Pro",
             base: "B164",
-            leftImg: "",
+            leftImg: "../assets/crobat_orange.webp",
             caseImg: "",
             rightImg: "",
             duoImg: "../assets/crobat_orange.webp",
@@ -154,7 +154,7 @@ function getModelFromFastpair(fastpairID) {
         "26C190": {
             name: "CMF Neckband Pro",
             base: "B164",
-            leftImg: "",
+            leftImg: "../assets/crobat_white.webp",
             caseImg: "",
             rightImg: "",
             duoImg: "../assets/crobat_white.webp",
@@ -163,7 +163,7 @@ function getModelFromFastpair(fastpairID) {
         "AE35FD": {
             name: "CMF Neckband Pro",
             base: "B164",
-            leftImg: "",
+            leftImg: "../assets/crobat_black.webp",
             caseImg: "",
             rightImg: "",
             duoImg: "../assets/crobat_black.webp",
