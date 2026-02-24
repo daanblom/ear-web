@@ -8,6 +8,7 @@ This website is compatible with the following devices:
 - Nothing ear (1)
 - Nothing ear (stick)
 - Nothing ear (2)
+- Nothing ear (3)
 - CMF Buds Pro
 - CMF Buds
 - Nothing Ear
