@@ -2060,6 +2060,585 @@
     ]
   },
   {
+    "id": "B156",
+    "brand": 1,
+    "style": 0,
+    "configs": [
+      {
+        "maxFirmware": "*.*.1.94",
+        "privateCode":212,
+        "advancedEqTotalGain": -6,
+        "dualConnection": 1,
+        "dualConnectionReboot": 1,
+        "ancLevel": 63,
+        "personalizedAnc": 1,
+        "advancedEq": 0,
+        "earTipFitTest": 1,
+        "otaProtocol": 1,
+        "highQualityAudio": 2,
+        "mimi": 1,
+        "defaultControl": "080201020903010209020103080301030802010716030107160201090103010901",
+        "customEQ":{
+          "freqLow":140.0,
+          "qLow":0.8,
+          "freqPeak":980.0,
+          "qPeak":0.7,
+          "freqHigh":3400.0,
+          "qHigh":1.0
+        },
+        "buttonPosition":4,
+        "guideInfos": [
+          {
+            "gestureType": 1,
+            "lottieFile": "Pinch_Single",
+            "descKey": ["control_single_press","control_play_pause","control_answer_hang_up"]
+          },
+          {
+            "gestureType": 2,
+            "lottieFile": "Pinch_Double",
+            "descKey": ["control_double_press","control_skip_forward","control_decline_incoming_call"]
+          },
+          {
+            "gestureType": 3,
+            "lottieFile": "Pinch_Triple",
+            "descKey": ["control_triple_press","control_skip_back"]
+          },
+          {
+            "gestureType": 4,
+            "lottieFile": "Pinch_Long",
+            "descKey": ["control_press_hold","anc_noise_control"]
+          }
+        ],
+        "supportCTKD": 1,
+        "isUseGattOverBREDR": 0,
+        "otaBattery": 30,
+        "controls": {
+          "imageType": 0,
+          "controlRoute": "route_headphone1",
+          "earGestureGroups": [
+            {
+              "gestures": [
+                {
+                  "isCustom": true,
+                  "deviceType": 2,
+                  "button": 1,
+                  "gesture": 2,
+                  "gestureImgKey": "control_controlIcIndexTwo",
+                  "gestureNameKey": "control_double_press",
+                  "defaultOperation": {
+                    "default": 9
+                  },
+                  "operationGroups": [
+                    {
+                      "groupName": "",
+                      "operations": [
+                        {
+                          "operation": 8,
+                          "isCustom": true,
+                          "operationDescKey": [
+                            "control_skip_back"
+                          ]
+                        },
+                        {
+                          "operation": 9,
+                          "isCustom": true,
+                          "operationDescKey": [
+                            "control_skip_forward"
+                          ]
+                        },
+                        {
+                          "operation": 11,
+                          "isCustom": true,
+                          "childType": 1,
+                          "operationDescKey": [
+                            "control_voice_assistant"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "groupName": "gesture_not_customisation",
+                      "operations": [
+                        {
+                          "operation": 29,
+                          "isCustom": false,
+                          "operationDescKey": [
+                            "control_decline_incoming_call"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "isCustom": true,
+                  "deviceType": 2,
+                  "button": 1,
+                  "gesture": 3,
+                  "gestureImgKey": "control_controlIcIndexThree",
+                  "gestureNameKey": "control_triple_press",
+                  "defaultOperation": {
+                    "default": 8
+                  },
+                  "operationGroups": [
+                    {
+                      "groupName": "",
+                      "operations": [
+                        {
+                          "operation": 8,
+                          "isCustom": true,
+                          "operationDescKey": [
+                            "control_skip_back"
+                          ]
+                        },
+                        {
+                          "operation": 9,
+                          "isCustom": true,
+                          "operationDescKey": [
+                            "control_skip_forward"
+                          ]
+                        },
+                        {
+                          "operation": 11,
+                          "isCustom": true,
+                          "childType": 1,
+                          "operationDescKey": [
+                            "control_voice_assistant"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "isCustom": true,
+                  "deviceType": 2,
+                  "button": 1,
+                  "gesture": 7,
+                  "gestureImgKey": "control_controlIcIndexTapHold",
+                  "gestureNameKey": "control_press_hold",
+                  "defaultOperation": {
+                    "default": 22
+                  },
+                  "operationGroups": [
+                    {
+                      "groupName": "",
+                      "operations": [
+                        {
+                          "operation": 10,
+                          "isCustom": true,
+                          "operationDescKey": [
+                            "anc_noise_control"
+                          ]
+                        },
+                        {
+                          "operation": 18,
+                          "isCustom": true,
+                          "operationDescKey": [
+                            "control_volume_up"
+                          ]
+                        },
+                        {
+                          "operation": 19,
+                          "isCustom": true,
+                          "operationDescKey": [
+                            "control_volume_down"
+                          ]
+                        },
+                        {
+                          "operation": 11,
+                          "isCustom": true,
+                          "childType": 1,
+                          "operationDescKey": [
+                            "control_voice_assistant"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "isCustom": true,
+                  "deviceType": 2,
+                  "button": 1,
+                  "gesture": 9,
+                  "gestureImgKey": "control_controlIcIndexDoubleTapHold",
+                  "gestureNameKey": "control_double_press_hold",
+                  "defaultOperation": {
+                    "default": 1
+                  },
+                  "operationGroups": [
+                    {
+                      "groupName": "",
+                      "operations": [
+                        {
+                          "operation": 10,
+                          "isCustom": true,
+                          "operationDescKey": [
+                            "anc_noise_control"
+                          ]
+                        },
+                        {
+                          "operation": 18,
+                          "isCustom": true,
+                          "operationDescKey": [
+                            "control_volume_up"
+                          ]
+                        },
+                        {
+                          "operation": 19,
+                          "isCustom": true,
+                          "operationDescKey": [
+                            "control_volume_down"
+                          ]
+                        },
+                        {
+                          "operation": 11,
+                          "isCustom": true,
+                          "childType": 1,
+                          "operationDescKey": [
+                            "control_voice_assistant"
+                          ]
+                        },
+                        {
+                          "operation": 1,
+                          "isCustom": true,
+                          "operationDescKey": [
+                            "control_no_action"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "groupName": "gesture_not_customisation",
+              "gestures": [
+                {
+                  "isCustom": false,
+                  "deviceType": 2,
+                  "button": 8,
+                  "gesture": 1,
+                  "gestureImgKey": "control_controlIcIndexOne",
+                  "gestureNameKey": "control_single_press",
+                  "operationGroups": [
+                    {
+                      "groupName": "",
+                      "operations": [
+                        {
+                          "operation": -1,
+                          "isCustom": false,
+                          "operationDescKey": [
+                            "control_play_pause",
+                            "control_answer_hang_up"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "voiceConfig": {
+          "deviceType": 2,
+          "button": 1,
+          "gesture": 7,
+          "operation": 11
+        }
+      },
+      {
+        "minFirmware": "*.*.1.95",
+        "privateCode":212,
+        "advancedEqTotalGain": -6,
+        "dualConnection": 1,
+        "dualConnectionReboot": 1,
+        "ancLevel": 63,
+        "personalizedAnc": 1,
+        "advancedEq": 1,
+        "earTipFitTest": 1,
+        "otaProtocol": 1,
+        "highQualityAudio": 2,
+        "mimi": 1,
+        "defaultControl": "080201020903010209020103080301030802010716030107160201090103010901",
+        "customEQ":{
+          "freqLow":140.0,
+          "qLow":0.8,
+          "freqPeak":980.0,
+          "qPeak":0.7,
+          "freqHigh":3400.0,
+          "qHigh":1.0
+        },
+        "buttonPosition":4,
+        "guideInfos": [
+          {
+            "gestureType": 1,
+            "lottieFile": "Pinch_Single",
+            "descKey": ["control_single_press","control_play_pause","control_answer_hang_up"]
+          },
+          {
+            "gestureType": 2,
+            "lottieFile": "Pinch_Double",
+            "descKey": ["control_double_press","control_skip_forward","control_decline_incoming_call"]
+          },
+          {
+            "gestureType": 3,
+            "lottieFile": "Pinch_Triple",
+            "descKey": ["control_triple_press","control_skip_back"]
+          },
+          {
+            "gestureType": 4,
+            "lottieFile": "Pinch_Long",
+            "descKey": ["control_press_hold","anc_noise_control"]
+          }
+        ],
+        "supportCTKD": 1,
+        "isUseGattOverBREDR": 0,
+        "otaBattery": 30,
+        "controls": {
+          "imageType": 0,
+          "controlRoute": "route_headphone1",
+          "earGestureGroups": [
+            {
+              "gestures": [
+                {
+                  "isCustom": true,
+                  "deviceType": 2,
+                  "button": 1,
+                  "gesture": 2,
+                  "gestureImgKey": "control_controlIcIndexTwo",
+                  "gestureNameKey": "control_double_press",
+                  "defaultOperation": {
+                    "default": 9
+                  },
+                  "operationGroups": [
+                    {
+                      "groupName": "",
+                      "operations": [
+                        {
+                          "operation": 8,
+                          "isCustom": true,
+                          "operationDescKey": [
+                            "control_skip_back"
+                          ]
+                        },
+                        {
+                          "operation": 9,
+                          "isCustom": true,
+                          "operationDescKey": [
+                            "control_skip_forward"
+                          ]
+                        },
+                        {
+                          "operation": 11,
+                          "isCustom": true,
+                          "childType": 1,
+                          "operationDescKey": [
+                            "control_voice_assistant"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "groupName": "gesture_not_customisation",
+                      "operations": [
+                        {
+                          "operation": 29,
+                          "isCustom": false,
+                          "operationDescKey": [
+                            "control_decline_incoming_call"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "isCustom": true,
+                  "deviceType": 2,
+                  "button": 1,
+                  "gesture": 3,
+                  "gestureImgKey": "control_controlIcIndexThree",
+                  "gestureNameKey": "control_triple_press",
+                  "defaultOperation": {
+                    "default": 8
+                  },
+                  "operationGroups": [
+                    {
+                      "groupName": "",
+                      "operations": [
+                        {
+                          "operation": 8,
+                          "isCustom": true,
+                          "operationDescKey": [
+                            "control_skip_back"
+                          ]
+                        },
+                        {
+                          "operation": 9,
+                          "isCustom": true,
+                          "operationDescKey": [
+                            "control_skip_forward"
+                          ]
+                        },
+                        {
+                          "operation": 11,
+                          "isCustom": true,
+                          "childType": 1,
+                          "operationDescKey": [
+                            "control_voice_assistant"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "isCustom": true,
+                  "deviceType": 2,
+                  "button": 1,
+                  "gesture": 7,
+                  "gestureImgKey": "control_controlIcIndexTapHold",
+                  "gestureNameKey": "control_press_hold",
+                  "defaultOperation": {
+                    "default": 22
+                  },
+                  "operationGroups": [
+                    {
+                      "groupName": "",
+                      "operations": [
+                        {
+                          "operation": 10,
+                          "isCustom": true,
+                          "operationDescKey": [
+                            "anc_noise_control"
+                          ]
+                        },
+                        {
+                          "operation": 18,
+                          "isCustom": true,
+                          "operationDescKey": [
+                            "control_volume_up"
+                          ]
+                        },
+                        {
+                          "operation": 19,
+                          "isCustom": true,
+                          "operationDescKey": [
+                            "control_volume_down"
+                          ]
+                        },
+                        {
+                          "operation": 11,
+                          "isCustom": true,
+                          "childType": 1,
+                          "operationDescKey": [
+                            "control_voice_assistant"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "isCustom": true,
+                  "deviceType": 2,
+                  "button": 1,
+                  "gesture": 9,
+                  "gestureImgKey": "control_controlIcIndexDoubleTapHold",
+                  "gestureNameKey": "control_double_press_hold",
+                  "defaultOperation": {
+                    "default": 1
+                  },
+                  "operationGroups": [
+                    {
+                      "groupName": "",
+                      "operations": [
+                        {
+                          "operation": 10,
+                          "isCustom": true,
+                          "operationDescKey": [
+                            "anc_noise_control"
+                          ]
+                        },
+                        {
+                          "operation": 18,
+                          "isCustom": true,
+                          "operationDescKey": [
+                            "control_volume_up"
+                          ]
+                        },
+                        {
+                          "operation": 19,
+                          "isCustom": true,
+                          "operationDescKey": [
+                            "control_volume_down"
+                          ]
+                        },
+                        {
+                          "operation": 11,
+                          "isCustom": true,
+                          "childType": 1,
+                          "operationDescKey": [
+                            "control_voice_assistant"
+                          ]
+                        },
+                        {
+                          "operation": 1,
+                          "isCustom": true,
+                          "operationDescKey": [
+                            "control_no_action"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "groupName": "gesture_not_customisation",
+              "gestures": [
+                {
+                  "isCustom": false,
+                  "deviceType": 2,
+                  "button": 8,
+                  "gesture": 1,
+                  "gestureImgKey": "control_controlIcIndexOne",
+                  "gestureNameKey": "control_single_press",
+                  "operationGroups": [
+                    {
+                      "groupName": "",
+                      "operations": [
+                        {
+                          "operation": -1,
+                          "isCustom": false,
+                          "operationDescKey": [
+                            "control_play_pause",
+                            "control_answer_hang_up"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "voiceConfig": {
+          "deviceType": 2,
+          "button": 1,
+          "gesture": 7,
+          "operation": 11
+        }
+      }
+    ]
+  },
+  {
     "id": "B162",
     "brand": 1,
     "style": 0,

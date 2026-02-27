@@ -72,7 +72,7 @@ function getModelFromFastpair(fastpairID) {
         },
         "7D46E5": {
             name: "Nothing Ear (3)",
-            base: "B171",
+            base: "B156",
             leftImg: "../assets/ear_three_black_left.webp",
             caseImg: "../assets/ear_three_black_case.webp",
             rightImg: "../assets/ear_three_black_right.webp",
@@ -81,7 +81,7 @@ function getModelFromFastpair(fastpairID) {
         },
         "C1EBFD": {
             name: "Nothing Ear (3)",
-            base: "B171",
+            base: "B156",
             leftImg: "../assets/ear_three_white_left.webp",
             caseImg: "../assets/ear_three_white_case.webp",
             rightImg: "../assets/ear_three_white_right.webp",

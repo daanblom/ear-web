@@ -20,6 +20,8 @@ async function switchViewFromModelID(model, sku) {
         window.location.href = "MainControl/MainControl_corsola.html" + window.location.search;
     } else if (model.base == "B171") {
         window.location.href = "MainControl/MainControl_twos.html" + window.location.search;
+    } else if (model.base == "B156") {
+        window.location.href = "MainControl/MainControl_threes.html" + window.location.search;
     } else if (model.base == "B172") {
         window.location.href = "MainControl/MainControl_espeon.html" + window.location.search;
     } else if (model.base == "B168") {
